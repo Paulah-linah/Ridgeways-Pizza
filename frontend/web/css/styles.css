@@ -1,0 +1,172 @@
+@media only screen and (min-width: 310px) {
+  html {
+    scroll-behavior: smooth;
+  }
+  #logo {
+    height: 90px;
+  }
+
+  #about-bg {
+    background-image: url("../assets/pizzeria.jpg");
+    background-blend-mode: overlay;
+    background-attachment: fixed;
+    background-size: cover;
+    background-repeat: no-repeat;
+    opacity: 40%;
+    z-index: -100;
+    background-color: rgb(85, 85, 85);
+  }
+
+  body {
+    position: sticky;
+    background-color: rgb(0, 4, 214);
+    font-family: Montserrat;
+    color: rgb(255, 255, 255, 0.9);
+    height: 100%;
+    overflow: hidden;
+  }
+
+  #video {
+    width: 100%;
+    /* overflow: hidden; */
+    position: absolute;
+    top: 0;
+    z-index: -1;
+    height: 100%;
+  }
+
+  video {
+    position: fixed;
+    height: 100%;
+    z-index: -2;
+    opacity: 60%;
+  }
+
+  #collapsibleNavbar .nav-link,
+  #collapsibleNavbar .nav-link:visited,
+  #collapsibleNavbar .nav-link {
+    /* font-family: "Montserrat"; */
+    text-transform: uppercase;
+    font-size: 1.2em;
+    font-weight: 700;
+    padding: 10px;
+    color: rgb(255, 255, 255, 0.8);
+  }
+
+  .card {
+    border: none;
+  }
+
+  a,
+  a:active,
+  a:visited,
+  a:hover {
+    text-decoration: none;
+    color: inherit;
+  }
+
+  #menu,
+  #meat,
+  #veggie,
+  #drinks {
+    background-color: rgba(0, 0, 0, 0.5);
+    overflow-y: scroll;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 100vh;
+  }
+
+  .jumbotron {
+    margin-top: 15%;
+    /* width: 75%; */
+    justify-content: center;
+  }
+
+  #menu div,
+  table {
+    border-radius: 5px;
+  }
+
+  .row {
+    margin: auto;
+  }
+
+  iframe {
+    width: 100%;
+    height: 400px;
+    padding: 0;
+    border: 0;
+    border-radius: 10px;
+    margin-top: 30px;
+  }
+
+  #total-amount {
+    text-align: right;
+  }
+
+  h1.display-4 {
+    font-size: 2.5em;
+  }
+  input[type="number"], input[type="checkbox"], table select {
+    font-size: 1em;
+    padding: 5px;
+    margin-left: 10px;
+    text-align: center;
+    /* width: 80px; */
+    border: none;
+    border-radius: 5px;
+    background-color: rgb(231, 231, 231);
+    color: rgb(85, 85, 85);
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  #meat .card-footer {
+    min-height: 180px;
+  }
+
+  h1.display-4 {
+    font-size: 3.5rem;
+  }
+}
+
+@media only screen and (min-width: 1280px) {
+  .jumbotron {
+    width: 55%;
+    max-width: 700px;
+    margin-top: 5%;
+    justify-content: start;
+  }
+
+  nav.navbar {
+    padding-left: 50px;
+    padding-right: 50px;
+    padding-top: 20px;
+  }
+
+  .row {
+    /* max-width: 1200px; */
+    margin: auto;
+  }
+
+  .row .card-footer {
+    height: 200px;
+  }
+
+  #drinks .row .card-footer {
+    height: auto;
+  }
+
+  a[href="#main"]+h3 {
+    margin-top: 70px;
+  }
+
+  #menu div {
+    height: 150px;
+  }
+  div[style="max-width: 500px;"]{
+    margin-top: 7%;
+  }
+}
