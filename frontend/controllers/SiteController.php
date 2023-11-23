@@ -143,7 +143,23 @@ class SiteController extends Controller
      */
     public function actionAbout()
     {
+        $this->layout = 'secondary';
+
         return $this->render('about');
+    }
+
+    public function actionCart()
+    {
+        $this->layout = 'secondary';
+
+        return $this->render('cart');
+    }
+
+    public function actionCheckout()
+    {
+        $this->layout = 'secondary';
+
+        return $this->render('checkout');
     }
 
     /**

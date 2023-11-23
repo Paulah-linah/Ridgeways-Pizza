@@ -9,6 +9,7 @@ use yii\bootstrap5\Breadcrumbs;
 use yii\bootstrap5\Html;
 use yii\bootstrap5\Nav;
 use yii\bootstrap5\NavBar;
+use yii\helpers\Url;
 
 AppAsset::register($this);
 ?>
@@ -37,10 +38,12 @@ AppAsset::register($this);
             </button>
             <div class="collapse navbar-collapse justify-content-end" id="collapsibleNavbar">
                 <ul class="navbar-nav text-right pr-2">
-                    <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
-                    <li class="nav-item"><a href="contact.html" class="nav-link">Contact</i></a></li>
-                    <li id="cart" class="nav-item ml-4"><a href="cart.html" class="nav-link"><span id="cart-num"
-                                class="mr-2 font-weight-bold"></span><i class="fas fa-shopping-cart"></i></a></li>
+                    <li class="nav-item"><a href="<?= Url::to(['site/about']) ?>" class="nav-link">About</a></li>
+                    <li class="nav-item"><a href="<?= Url::to(['site/contact']) ?>" class=" nav-link">Contact</i></a>
+                    </li>
+                    <li id="cart" class="nav-item ml-4"><a href="<?= Url::to(['site/cart']) ?>" class="nav-link"><span
+                                id="cart-num" class="mr-2 font-weight-bold"></span><i
+                                class="fas fa-shopping-cart"></i></a></li>
                 </ul>
             </div>
         </nav>
