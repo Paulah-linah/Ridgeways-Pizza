@@ -33,6 +33,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'attributes' => [
             'pizzaId',
             'pizzaName',
+            'description',
             [
                 'attribute' => 'pizzaImage',
                 'format' => 'html', // Set the format to HTML
@@ -41,8 +42,13 @@ $this->params['breadcrumbs'][] = $this->title;
                 // Assuming 'pizzaImage' contains the image path. Modify this according to your actual attribute name.
             },
             ],
-            'categoryId',
-
+            [
+                'attribute' => 'categoryId',
+                'value' => function ($model) {
+                // Assuming you have a 'category' relation in your Book model
+                return $model->category->categoryName;
+            },
+            ],
         ],
     ]) ?>
 

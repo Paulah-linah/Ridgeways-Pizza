@@ -1,13 +1,20 @@
 <?php
+use common\models\Pizza;
+use common\models\Size;
+use common\models\User;
+
+use yii\helpers\Html;
+use yii\helpers\Url;
 
 /** @var yii\web\View $this */
 
-$this->title = 'My Yii Application';
+$this->title = 'Pizza Spot';
+$meatPizzas = Pizza::find()->where(['categoryId' => 1])->all();
+$vegPizzas = Pizza::find()->where(['categoryId' => 2])->all();
+$sizes = Size::find()->all();
+
+
 ?>
-<!-- <div id="main" class="container-fluid p-0 vh-100 overflow-hidden position-relative">
-
-
-</div> -->
 <div id="menu" class="container-fluid position-relative p-4 pt-5 text-center">
     <a href="#main"><i class="fas fa-arrow-circle-up mb-5 h2"></i></a>
     <h3 class="mb-4">Choose a menu.</h3>
@@ -32,80 +39,139 @@ $this->title = 'My Yii Application';
     </div>
 </div>
 <div id="meat" class="container-fluid position-relative p-4 pt-5 text-center">
-    <a href="#menu"><i class="fas fa-arrow-circle-up mb-5 h2"></i></a>
+    <a href="#menu"><i class="fas fa-arrow-circle-up mb-5 h2"></i>
+    </a>
     <h3 class="mb-4">Meat Pizzas</h3>
     <div class="row">
-        <div class="col-lg-3 col-md-6 mb-4">
-            <div id="pepperoni" class="card pizza">
-                <div class="card-body p-0">
-                    <img src="assets/pepperoni.png" class="card-img" alt="pepperoni">
-                </div>
-                <div class="card-footer text-dark pl-5 pr-5 pt-4">
-                    <h4 class="font-weight-bold">Pepperoni</h4>
-                    <p class="lead">Pork-beef salami with grilled tomatoes.</p>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-3 col-md-6 mb-4">
-            <div id="hawaiian" class="card pizza">
-                <div class="card-body p-0">
-                    <img src="assets/hawaiian.jpg" class="card-img" alt="hawaiian">
-                </div>
-                <div class="card-footer text-dark pl-5 pr-5 pt-4">
-                    <h4 class="font-weight-bold">Hawaiian</h4>
-                    <p class="lead">Ham with grilled pineapple and rich tomato sauce</p>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-3 col-md-6 mb-4">
-            <div id="bbq-chicken" class="card pizza">
-                <div class="card-body p-0">
-                    <img src="assets/bbq-chicken.jpg" class="card-img" alt="bbq chicken">
-                </div>
-                <div class="card-footer text-dark pl-5 pr-5 pt-4">
-                    <h4 class="font-weight-bold">BBQ Chicken</h4>
-                    <p class="lead">Saucy chicken with fresh onion rings</p>
+        <?php foreach ($meatPizzas as $pizza): ?>
+
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div id="<?= Html::encode($pizza->pizzaId) ?>" class="card pizza">
+                    <div class="card-body p-0">
+
+                        <img src=" <?= Html::encode(Url::to('/Ridgeways-Pizza/backend/web/' . $pizza->pizzaImage)) ?>"
+                            class="card-img" alt="<?= Html::encode($pizza->pizzaName) ?>">
+                    </div>
+                    <div class="card-footer text-dark pl-5 pr-5 pt-4">
+                        <h4 class="font-weight-bold">
+                            <?= Html::encode($pizza->pizzaName) ?>
+                        </h4>
+                        <p class="lead">
+                            <?= Html::encode($pizza->description) ?>
+                        </p>
+                        <button type="button" class="btn btn-primary btn-add-to-cart" data-pizza-id="<?= $pizza->pizzaId ?>"
+                            data-toggle="modal" data-target="#addToCartModal">
+                            Add to Cart
+                        </button>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="col-lg-3 col-md-6 mb-4">
-            <div id="beef" class="card pizza">
-                <div class="card-body p-0">
-                    <img src="assets/beef.jpeg" class="card-img" alt="beef mince">
-                </div>
-                <div class="card-footer text-dark pl-5 pr-5 pt-4">
-                    <h4 class="font-weight-bold">Beef Mince</h4>
-                    <p class="lead">Spicy minced beef with diced tomatoes </p>
-                </div>
-            </div>
-        </div>
+        <?php endforeach; ?>
     </div>
 </div>
 <div id="veggie" class="container-fluid position-relative p-4 pt-5 text-center">
     <a href="#menu"><i class="fas fa-arrow-circle-up mb-5 h2"></i></a>
     <h3 class="mb-4">Vegetarian Pizzas</h3>
     <div class="row" style="max-width: 900px;">
-        <div class="col-md-6 mb-4">
-            <div id="mushroom" class="card pizza">
-                <div class="card-body p-0">
-                    <img src="assets/mushroom.jpg" class="card-img" alt="pepperoni">
-                </div>
-                <div class="card-footer text-dark pl-5 pr-5 pt-4">
-                    <h4 class="font-weight-bold">Mushroom</h4>
-                    <p class="lead">Sliced mushrooms seasoned with thyme, oregano, and olive oil</p>
+        <?php foreach ($vegPizzas as $pizza): ?>
+
+            <div class="col-md-6 mb-4">
+                <div id="<?= Html::encode($pizza->pizzaId) ?>" class="card pizza">
+                    <div class="card-body p-0">
+
+                        <img src=" <?= Html::encode(Url::to('/Ridgeways-Pizza/backend/web/' . $pizza->pizzaImage)) ?>"
+                            class="card-img" alt="<?= Html::encode($pizza->pizzaName) ?>">
+                    </div>
+                    <div class="card-footer text-dark pl-5 pr-5 pt-4">
+                        <h4 class="font-weight-bold">
+                            <?= Html::encode($pizza->pizzaName) ?>
+                        </h4>
+                        <p class="lead">
+                            <?= Html::encode($pizza->description) ?>
+                        </p>
+                        <button type="button" class="btn btn-primary btn-add-to-cart" data-pizza-id="<?= $pizza->pizzaId ?>"
+                            data-toggle="modal" data-target="#addToCartModal">
+                            Add to Cart
+                        </button>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="col-md-6 mb-4">
-            <div id="eggplant" class="card pizza">
-                <div class="card-body p-0">
-                    <img src="assets/eggplant.jpg" class="card-img" alt="hawaiian">
-                </div>
-                <div class="card-footer text-dark pl-5 pr-5 pt-4">
-                    <h4 class="font-weight-bold">Eggplant</h4>
-                    <p class="lead">Chopped eggplant with minced garlic and extra-virgin olive oil</p>
-                </div>
+        <?php endforeach; ?>
+    </div>
+</div>
+<!-- Modal for adding to cart -->
+<div class="modal fade" id="addToCartModal" tabindex="-1" role="dialog" aria-labelledby="addToCartModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addToCartModalLabel">Add Pizza to Cart</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <!-- Form to select quantity and size -->
+                <form id="addToCartForm">
+                    <input type="hidden" id="selectedPizzaId" name="selectedPizzaId">
+                    <div class="form-group">
+                        <label for="quantity" style="color:black;">Quantity:</label>
+                        <input type="number" class="form-control" id="quantity" name="quantity" min="1" required>
+                    </div>
+                    <input type="hidden" name="<?= Yii::$app->request->csrfParam ?>"
+                        value="<?= Yii::$app->request->getCsrfToken() ?>" S />
+                    <div class="form-group">
+                        <label for="size" style="color:black;">Size:</label>
+                        <select class="form-control" id="size" name="size" required>
+                            <?php foreach ($sizes as $size): ?>
+                                <option value="<?= $size->sizeId ?>">
+                                    <?= Html::encode($size->sizeName) ?> -
+                                    <?= Html::encode($size->price) ?>
+                                </option>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Add to Cart</button>
+                </form>
             </div>
         </div>
     </div>
 </div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        $('.btn-add-to-cart').on('click', function () {
+            var pizzaId = $(this).data('pizza-id');
+            $('#selectedPizzaId').val(pizzaId);
+            console.log("pizzaId", pizzaId);
+        });
+
+        $('#addToCartForm').on('submit', function (event) {
+            event.preventDefault(); // Prevent the default form submission
+
+            var formData = $(this).serialize();
+            $.ajax({
+                type: 'POST',
+                url: '<?= Url::to(['/site/add-to-cart']) ?>', // Update this URL with your Yii2 action URL
+                data: formData,
+                success: function (response) {
+                    // Handle success response here
+                    console.log(response);
+                    $('#addToCartModal').modal('hide');
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Success!',
+                        text: 'Item added to cart successfully.',
+                    });
+                },
+                error: function (xhr, status, error) {
+                    // Handle error response here
+                    console.error(xhr.responseText);
+                    alert('An error occurred while adding to cart. Please try again.');
+                }
+            });
+        });
+    });
+
+</script>

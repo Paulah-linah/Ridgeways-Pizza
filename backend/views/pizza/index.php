@@ -15,7 +15,9 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="pizza-index">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+    <h1>
+        <?= Html::encode($this->title) ?>
+    </h1>
 
     <p>
         <?= Html::a('Create Pizza', ['create'], ['class' => 'btn btn-success']) ?>
@@ -31,13 +33,27 @@ $this->params['breadcrumbs'][] = $this->title;
 
             'pizzaId',
             'pizzaName',
-            'pizzaImage',
-            'categoryId',
+            'description',
+            [
+                'attribute' => 'pizzaImage',
+                'format' => 'html', // Set the format to HTML
+                'value' => function ($model) {
+                        return Html::img(Yii::$app->request->baseUrl . '/' . $model->pizzaImage, ['width' => '200px']);
+                        // Assuming 'pizzaImage' contains the image path. Modify this according to your actual attribute name.
+                    },
+            ],
+            [
+                'attribute' => 'categoryId',
+                'value' => function ($model) {
+                        // Assuming you have a 'category' relation in your Book model
+                        return $model->category->categoryName;
+                    },
+            ],
             [
                 'class' => ActionColumn::className(),
                 'urlCreator' => function ($action, Pizza $model, $key, $index, $column) {
-                    return Url::toRoute([$action, 'pizzaId' => $model->pizzaId]);
-                 }
+                        return Url::toRoute([$action, 'pizzaId' => $model->pizzaId]);
+                    }
             ],
         ],
     ]); ?>

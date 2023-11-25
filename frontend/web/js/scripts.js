@@ -50,7 +50,7 @@ Pizza.prototype.addToCart = function () {
 }
 
 $().ready(function () {
-  $(".pizza").click(function (event) {
+  $(".piza").click(function (event) {
     var thisOrder = new Pizza($("h4", this).first().text(), "", "", "", "");
     var random = "<h3>" + thisOrder.type + "</h3><form> <table class='table table-resposive table-borderless text-dark mx-auto'> <tr> <td class='text-left'> <label>Quantity</label> <input class='' type='number' id='quantity' value='1' min='1' style='width: 70px;' required> </td> <td class='text-right'> <label>Size</label> <select class='' id='size' required> <option value=''> -- </option> <option value='large'>Large</option> <option value='medium'>Medium</option> <option value='small'>Small</option> </select> </td> </tr> <tr> <td class='text-left'> <label for='crust'>Crust Type</label> <select name='crust' id='crust'> <option value=''required>--</option> <option value='Thick'>Thick Crust</option> <option value='Thin'>Thin Crust</option> </select> </td> <td class='text-right'> <label for='toppings'>Extra toppings</label> <input type='checkbox' id='toppings'> </td> </tr> </table> <p id='error' class='text-danger'></p><button class='btn btn-primary pizza' type='button' id='proceed'>Add to Cart</button></form>";
     Swal.fire({

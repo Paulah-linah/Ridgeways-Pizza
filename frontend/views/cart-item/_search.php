@@ -4,26 +4,26 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /** @var yii\web\View $this */
-/** @var common\models\PizzaSearch $model */
+/** @var frontend\models\CartItemSearch $model */
 /** @var yii\widgets\ActiveForm $form */
 ?>
 
-<div class="pizza-search">
+<div class="cart-item-search">
 
     <?php $form = ActiveForm::begin([
         'action' => ['index'],
         'method' => 'get',
     ]); ?>
 
+    <?= $form->field($model, 'cartItemId') ?>
+
     <?= $form->field($model, 'pizzaId') ?>
 
-    <?= $form->field($model, 'pizzaName') ?>
+    <?= $form->field($model, 'sizeId') ?>
 
-    <?= $form->field($model, 'description') ?>
+    <?= $form->field($model, 'userId') ?>
 
-    <?= $form->field($model, 'pizzaImage') ?>
-
-    <?= $form->field($model, 'categoryId') ?>
+    <?= $form->field($model, 'quantity') ?>
 
     <div class="form-group">
         <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>

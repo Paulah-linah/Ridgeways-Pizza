@@ -9,6 +9,7 @@ use Yii;
  *
  * @property int $pizzaId
  * @property string $pizzaName
+ * @property string $description
  * @property string|null $pizzaImage
  * @property int $categoryId
  *
@@ -32,9 +33,10 @@ class Pizza extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['pizzaName', 'categoryId'], 'required'],
+            [['pizzaName', 'description', 'categoryId'], 'required'],
             [['categoryId'], 'integer'],
             [['pizzaName'], 'string', 'max' => 50],
+            [['description'], 'string', 'max' => 255],
             [['pizzaImage'], 'string', 'max' => 100],
             [['pizzaImageFile'], 'file', 'skipOnEmpty' => false, 'extensions' => 'png, jpg, jpeg'],
             [['categoryId'], 'exist', 'skipOnError' => true, 'targetClass' => Category::class, 'targetAttribute' => ['categoryId' => 'categoryId']],
@@ -49,6 +51,7 @@ class Pizza extends \yii\db\ActiveRecord
         return [
             'pizzaId' => 'Pizza ID',
             'pizzaName' => 'Pizza Name',
+            'description' => 'Description',
             'pizzaImage' => 'Pizza Image',
             'categoryId' => 'Category ID',
         ];

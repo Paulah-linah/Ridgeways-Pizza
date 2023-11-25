@@ -2,6 +2,9 @@
 
 namespace frontend\controllers;
 
+use frontend\models\CartItem;
+use common\models\User;
+
 use frontend\models\ResendVerificationEmailForm;
 use frontend\models\VerifyEmailForm;
 use Yii;
@@ -15,6 +18,7 @@ use frontend\models\PasswordResetRequestForm;
 use frontend\models\ResetPasswordForm;
 use frontend\models\SignupForm;
 use frontend\models\ContactForm;
+use yii\web\Response;
 
 /**
  * Site controller
@@ -271,5 +275,33 @@ class SiteController extends Controller
         return $this->render('resendVerificationEmail', [
             'model' => $model
         ]);
+    }
+
+    public function actionAddToCart()
+    {
+        Yii::$app->response->format = Response::FORMAT_JSON;
+
+        $request = Yii::$app->request;
+        if ($request->isAjax) {
+            $pizzaId = $request->post('selectedPizzaId'); // Replace this with how you'll identify the pizza
+            $sizeId = $request->post('size'); // Replace this with size
+            $userId = Yii::$app->user->id; // Assuming you have a user authentication system
+            $quantity = $request->post('quantity');
+
+            // Create a new CartItem model and save it to the database
+            $cartItem = new CartItem();
+            $cartItem->pizzaId = $pizzaId;
+            $cartItem->sizeId = $sizeId;
+            $cartItem->userId = $userId;
+            $cartItem->quantity = $quantity;
+
+            if ($cartItem->save()) {
+                return ['success' => true, 'message' => 'Pizza added to cart successfully!'];
+            } else {
+                return ['success' => false, 'message' => 'Failed to add pizza to cart.'];
+            }
+        }
+
+        return ['success' => false, 'message' => 'Invalid request.'];
     }
 }
